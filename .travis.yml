@@ -26,4 +26,4 @@ before_install:
 script:
 - export LWJGL_BUILD_TYPE=nightly
 - ant compile-templates tests
-#upload-native
+# upload-native
