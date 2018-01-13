@@ -1,9 +1,9 @@
 dist: trusty
 sudo: false
-env:
-  global:
-  - secure: "AzM98HKS2RDP+/WdvsFiEqTbVPwLBEAtNXDQPR7cV1gAEZoNhri/iINnRAHtECgVQDt2gKmxEiyOA07zMKPpt5PwhoyZUnICwxl1t2FOkTL4LlfI+3ew1rf4F8wmaSQX/BRT7b3IgyEI0RFRCow8KH49X8xdEtAFYJB3YFu2Y6M="
-  - secure: "BDNmD9y3mdZEQoFgXW2dC1FawofkThFwbITidMqeKLxSstNxQGKCpxOFAV604kaTGsf7ihpdm8WYE5IjHKTaoewdQ9hLXZPtswWXq5Ebe2gKHqJVNZa2bFD6hQBD2S7BLWWeAVIoLkyfV/QLnplOquUZTXWZ3TW2A+IXzQE+AnE="
+#env:
+#  global:
+#  - secure: "AzM98HKS2RDP+/WdvsFiEqTbVPwLBEAtNXDQPR7cV1gAEZoNhri/iINnRAHtECgVQDt2gKmxEiyOA07zMKPpt5PwhoyZUnICwxl1t2FOkTL4LlfI+3ew1rf4F8wmaSQX/BRT7b3IgyEI0RFRCow8KH49X8xdEtAFYJB3YFu2Y6M="
+#  - secure: "BDNmD9y3mdZEQoFgXW2dC1FawofkThFwbITidMqeKLxSstNxQGKCpxOFAV604kaTGsf7ihpdm8WYE5IjHKTaoewdQ9hLXZPtswWXq5Ebe2gKHqJVNZa2bFD6hQBD2S7BLWWeAVIoLkyfV/QLnplOquUZTXWZ3TW2A+IXzQE+AnE="
 language: java
 jdk: oraclejdk8
 
@@ -25,4 +25,5 @@ before_install:
 
 script:
 - export LWJGL_BUILD_TYPE=nightly
-- ant compile-templates tests upload-native
+- ant compile-templates tests
+#upload-native
