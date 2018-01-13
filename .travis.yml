@@ -1,5 +1,8 @@
 dist: trusty
-sudo: false
+sudo: required
+
+services:
+  - docker
 #env:
 #  global:
 #  - secure: "AzM98HKS2RDP+/WdvsFiEqTbVPwLBEAtNXDQPR7cV1gAEZoNhri/iINnRAHtECgVQDt2gKmxEiyOA07zMKPpt5PwhoyZUnICwxl1t2FOkTL4LlfI+3ew1rf4F8wmaSQX/BRT7b3IgyEI0RFRCow8KH49X8xdEtAFYJB3YFu2Y6M="
@@ -13,17 +16,20 @@ addons:
     - ubuntu-toolchain-r-test
     packages:
     - ant
-    - gcc-6
-    - g++-6
+#    - gcc-6
+#    - g++-6
     - oracle-java8-installer
-    - xorg-dev
-    - libgtk-3-dev
+#    - xorg-dev
+#    - libgtk-3-dev
 
 before_install:
 - pip install --user awscli
-- export PATH=$PATH:$HOME/.local/bin
+- docker pull intrigus/docker-raspberry-pi-cross-compiler
+- docker run sdthirlwall/raspberry-pi-cross-compiler > ~/bin/rpxc
+- chmod +x ~/bin/rpxc
+- export PATH=$PATH:$HOME/bin:$HOME/.local/bin
 
 script:
 - export LWJGL_BUILD_TYPE=nightly
-- ant compile-templates tests
+- rpxc sh -c 'ant compile-templates tests'
 # upload-native
