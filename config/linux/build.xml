@@ -6,11 +6,11 @@
     <import file="../build-definitions.xml"/>
 
     <condition property="LIB_POSTFIX" value="" else="32">
-        <equals arg1="${build.arch}" arg2="x64"/>
+        <equals arg1="${build.arch.bits}" arg2="64"/>
     </condition>
 
-    <condition property="build.arch.x64" value="true" else="false">
-        <equals arg1="${build.arch}" arg2="x64"/>
+    <condition property="build.arch.64" value="true" else="false">
+        <equals arg1="${build.arch.bits}" arg2="64"/>
     </condition>
 
     <property name="src.native.rel" value="../../../../${src.native}"/>
@@ -35,7 +35,7 @@
                 <arg line="-c -std=c11" unless:set="cpp"/>
                 <arg line="-c -std=c++11" if:set="cpp"/>
                 <arg line="-m64" if:true="${build.arch.x64}"/>
-                <arg line="-m32 -mfpmath=sse -msse -msse2" unless:true="${build.arch.x64}"/>
+                <arg line="-m32 -mfpmath=sse -msse -msse2" if:true="${build.arch.x86}"/>
                 <arg line="-O3 @{lto} -fPIC @{flags} -pthread -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=0 -D_GNU_SOURCE -DNDEBUG -DLWJGL_LINUX -DLWJGL_${build.arch}"/>
 
                 <arg value="-I${jni.headers}"/>
@@ -87,7 +87,7 @@
                 <srcfile/>
                 <arg value="-shared"/>
                 <arg value="-m64" if:true="${build.arch.x64}"/>
-                <arg value="-m32" unless:true="${build.arch.x64}"/>
+                <arg value="-m32" if:true="${build.arch.x86}"/>
 
                 <arg line="-z noexecstack"/>
                 <arg line="-O3 -flto -fPIC -pthread -o ${lib}/lib@{name}${LIB_POSTFIX}.so"/>
@@ -128,11 +128,11 @@
                 </fileset>
             </source>
             <beforeLink>
-                <mkdir dir="${lib}/linux/x64"/>
+                <mkdir dir="${lib}/linux/${build.arch}"/>
                 <parallel threadsPerProcessor="2" failonany="true" unless:set="lib-uptodate">
-                    <update-dependency name="dyncall" artifact="x64/libdyncall_s.a"/>
-                    <update-dependency name="dyncallback" artifact="x64/libdyncallback_s.a"/>
-                    <update-dependency name="dynload" artifact="x64/libdynload_s.a"/>
+                    <update-dependency name="dyncall" artifact="${build.arch}/libdyncall_s.a"/>
+                    <update-dependency name="dyncallback" artifact="${build.arch}/libdyncallback_s.a"/>
+                    <update-dependency name="dynload" artifact="${build.arch}/libdynload_s.a"/>
                 </parallel>
             </beforeLink>
             <link>
@@ -348,7 +348,7 @@
         </build>
 
         <!-- yoga -->
-        <build name="lwjgl_yoga" dest="${bin.native}/yoga" linker="g++-6" if:true="${binding.yoga}">
+        <build name="lwjgl_yoga" dest="${bin.native}/yoga" linker="${toolPrefix}g++${toolSuffix}" if:true="${binding.yoga}">
             <beforeCompile>
                 <compile dest="@{dest}" lang="c++" flags="">
                     <arg value="-I${src.native.rel}/util/yoga"/>
@@ -399,17 +399,17 @@
         </condition>
 
         <sequential unless:set="native-dependencies-uptodate">
-            <mkdir dir="${lib}/linux/x64"/>
+            <mkdir dir="${lib}/linux/${build.arch}"/>
 
             <parallel threadsPerProcessor="4" failonany="true">
 
-            <update-dependency name="Assimp" artifact="x64/libassimp.so" dest="${lib}" if:true="${binding.assimp}"/>
-            <update-dependency name="bgfx" artifact="x64/libbgfx.so" dest="${lib}" if:true="${binding.bgfx}"/>
-            <update-dependency name="jemalloc" artifact="x64/libjemalloc.so" dest="${lib}" if:true="${binding.jemalloc}"/>
-            <update-dependency name="GLFW" artifact="x64/libglfw.so" dest="${lib}" if:true="${binding.glfw}"/>
-            <update-dependency name="GLFW" artifact="x64/libglfw_wayland.so" dest="${lib}" if:true="${binding.glfw}"/>
-            <update-dependency name="OpenAL32" artifact="x64/libopenal.so" dest="${lib}" if:true="${binding.openal}"/>
-            <update-dependency name="OpenVR" artifact="x64/libopenvr_api.so" dest="${lib}" if:true="${binding.openvr}"/>
+            <update-dependency name="Assimp" artifact="${build.arch}/libassimp.so" dest="${lib}" if:true="${binding.assimp}"/>
+            <update-dependency name="bgfx" artifact="${build.arch}/libbgfx.so" dest="${lib}" if:true="${binding.bgfx}"/>
+            <update-dependency name="jemalloc" artifact="${build.arch}/libjemalloc.so" dest="${lib}" if:true="${binding.jemalloc}"/>
+            <update-dependency name="GLFW" artifact="${build.arch}/libglfw.so" dest="${lib}" if:true="${binding.glfw}"/>
+            <update-dependency name="GLFW" artifact="${build.arch}/libglfw_wayland.so" dest="${lib}" if:true="${binding.glfw}"/>
+            <update-dependency name="OpenAL32" artifact="${build.arch}/libopenal.so" dest="${lib}" if:true="${binding.openal}"/>
+            <update-dependency name="OpenVR" artifact="${build.arch}/libopenvr_api.so" dest="${lib}" if:true="${binding.openvr}"/>
 
             </parallel>
 
