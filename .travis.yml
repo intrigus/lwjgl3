@@ -31,5 +31,5 @@ before_install:
 
 script:
 - export LWJGL_BUILD_TYPE=nightly
-- rpxc --image intrigus/docker-raspberry-pi-cross-compiler sh -c 'ant compile-templates tests'
+- rpxc --image intrigus/docker-raspberry-pi-cross-compiler sh -c 'ant -DtoolPrefix=arm-linux-gnueabihf- compile-templates tests'
 # upload-native
