@@ -88,13 +88,17 @@ This script is included in /build.xml and /config/update-dependencies.xml.
     <property name="release.doc" location="${release}/doc" relative="true"/>
 
     <!--
-        The target native architecture. Must be either x86 or x64. By default, os.arch of the JVM
+        The target native architecture. Must be either x86, x64 or arm-v6. By default, os.arch of the JVM
         that runs ANT is used, but this can be overriden for cross-compiling to another architecture.
     -->
     <property name="build.arch" value="${env.LWJGL_BUILD_ARCH}" if:set="env.LWJGL_BUILD_ARCH"/>
-    <condition property="build.arch" value="x64" else="x86" unless:set="build.arch"> <!-- Normalize os.arch -->
+    <condition property="build.arch" value="x64" else="x86"> <!-- Normalize os.arch -->
         <contains string="${os.arch}" substring="64"/>
     </condition>
+    <condition property="build.arch.bits" value="64" else="32">
+        <contains string="${build.arch}" substring="64"/>
+    </condition>
+    <condition property="build.arch.64"><equals arg1="${build.arch.bits}" arg2="64"/></condition>
 
     <!--
         Offline build flag. This is useful when working offline, or when custom binary dependencies
