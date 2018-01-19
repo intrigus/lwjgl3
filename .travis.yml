@@ -32,5 +32,5 @@ before_install:
 script:
 - echo "export LWJGL_BUILD_TYPE=nightly" >> ~/.rpxc
 - echo "export LWJGL_BUILD_ARCH=arm-v6" >> ~/.rpxc
-- rpxc --image intrigus/docker-raspberry-pi-cross-compiler sh -c 'ant -DtoolPrefix=arm-linux-gnueabihf- compile-templates tests'
+- rpxc --image intrigus/docker-raspberry-pi-cross-compiler sh -c 'printenv && ant -DtoolPrefix=arm-linux-gnueabihf- compile-templates tests'
 # upload-native
