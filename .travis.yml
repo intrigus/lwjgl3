@@ -30,7 +30,7 @@ before_install:
 - export PATH=$PATH:$HOME/bin:$HOME/.local/bin
 
 script:
-- export LWJGL_BUILD_TYPE=nightly
-- export LWJGL_BUILD_ARCH=arm-v6
+- echo "export LWJGL_BUILD_TYPE=nightly" >> ~/.rpxc
+- echo "export LWJGL_BUILD_ARCH=arm-v6" >> ~/.rpxc
 - rpxc --image intrigus/docker-raspberry-pi-cross-compiler sh -c 'ant -DtoolPrefix=arm-linux-gnueabihf- compile-templates tests'
 # upload-native
