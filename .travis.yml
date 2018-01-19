@@ -32,7 +32,7 @@ before_install:
 script:
 - echo "LWJGL_BUILD_TYPE=nightly" >> .lwjgl_env_rpxc
 - echo "LWJGL_BUILD_ARCH=arm-v6" >> .lwjgl_env_rpxc
-- echo "LWJGL_BUILD_SYSROOT=$SYSROOT" >> .lwjgl_env_rpxc
+- echo "LWJGL_BUILD_SYSROOT=$(rpxc sh -c 'echo $SYSROOT')" >> .lwjgl_env_rpxc
 #- export 
 - rpxc --args "--env-file .lwjgl_env_rpxc" --image intrigus/docker-raspberry-pi-cross-compiler sh -c 'printenv && ant -DtoolPrefix=arm-linux-gnueabihf- compile-templates tests'
 # upload-native
