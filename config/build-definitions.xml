@@ -45,7 +45,7 @@ This script is included in /build.xml and /config/update-dependencies.xml.
     -->
     <property name="build.output" location="${env.LWJGL_BUILD_OUTPUT}" relative="false" if:set="env.LWJGL_BUILD_OUTPUT"/>
   
-    <property name="build.sysroot" location="${env.LWJGL_BUILD_SYSROOT}" relative="false" if:set="env.LWJGL_BUILD_SYSROOT"/>
+    <property name="build.sysroot" value="${env.LWJGL_BUILD_SYSROOT}" if:set="${env.LWJGL_BUILD_SYSROOT}"/>
 
     <property name="bin" location="bin" relative="true"/>
     <property name="doc" location="doc" relative="true"/>
