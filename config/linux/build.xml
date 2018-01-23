@@ -184,8 +184,8 @@
         <build name="lwjgl_nfd" dest="${bin.native}/nfd" if:true="${binding.nfd}">
             <beforeCompile>
                 <local name="gtk3"/>
-                <local name="stderr"/>
-                <exec outputproperty="gtk3" errorproperty="stderr" executable="pkg-config" failonerror="true" taskname="gtk-3.0">
+                <local name="stderr"/
+                <exec outputproperty="gtk3" logError="true" executable="pkg-config" failonerror="true" taskname="gtk-3.0">
                     <arg line="--cflags gtk+-3.0"/>
                 </exec>
 
