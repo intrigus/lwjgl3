@@ -34,6 +34,9 @@ script:
 #- echo "LWJGL_BUILD_OFFLINE=true" >> .lwjgl_env_rpxc
 - echo "LWJGL_BUILD_ARCH=armv6" >> .lwjgl_env_rpxc
 - echo "LWJGL_BUILD_SYSROOT=$(rpxc sh -c 'echo $SYSROOT')" >> .lwjgl_env_rpxc
+- echo "PKG_CONFIG_DIR=" >> .lwjgl_env_rpxc
+- echo "PKG_CONFIG_LIBDIR=$(rpxc sh -c 'echo $SYSROOT')/usr/lib/pkgconfig:$(rpxc sh -c 'echo $SYSROOT')/usr/share/pkgconfig" >> .lwjgl_env_rpxc
+- echo "PKG_CONFIG_SYSROOT_DIR=$(rpxc sh -c 'echo $SYSROOT')" >> .lwjgl_env_rpxc
 #- export 
-- rpxc --args "--env-file .lwjgl_env_rpxc" --image intrigus/docker-raspberry-pi-cross-compiler bash -c 'dpkg -l && printenv && ant -debug -DtoolPrefix=arm-linux-gnueabihf- compile-templates tests'
+- rpxc --args "--env-file .lwjgl_env_rpxc" --image intrigus/docker-raspberry-pi-cross-compiler bash -c 'printenv && ant -debug -DtoolPrefix=arm-linux-gnueabihf- compile-templates tests'
 # upload-native
