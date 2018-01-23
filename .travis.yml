@@ -38,6 +38,7 @@ script:
 - echo "PKG_CONFIG_DIR=" >> .lwjgl_env_rpxc
 - echo "PKG_CONFIG_LIBDIR=$(rpxc sh -c 'echo $SYSROOT')/usr/lib/pkgconfig:$(rpxc sh -c 'echo $SYSROOT')/usr/share/pkgconfig:$(rpxc sh -c 'echo $SYSROOT')/usr/lib/arm-linux-gnueabihf/pkgconfig:$(rpxc sh -c 'echo $SYSROOT')/usr/share/arm-linux-gnueabihf/pkgconfig" >> .lwjgl_env_rpxc
 - echo "PKG_CONFIG_SYSROOT_DIR=$(rpxc sh -c 'echo $SYSROOT')" >> .lwjgl_env_rpxc
+- cat .lwjgl_env_rpxc
 #- export 
 - rpxc --args "--env-file .lwjgl_env_rpxc" bash -c 'pkg-config --debug gtk+-3.0 && printenv && ant -debug -DtoolPrefix=arm-linux-gnueabihf- compile-templates tests'
 # upload-native
