@@ -37,7 +37,7 @@ script:
 - LWJGL_BUILD_SYSROOT=$(rpxc sh -c 'echo $SYSROOT')
 - echo "LWJGL_BUILD_SYSROOT=$LWJGL_BUILD_SYSROOT" >> .lwjgl_env_rpxc
 - echo "PKG_CONFIG_DIR=" >> .lwjgl_env_rpxc
-- echo "PKG_CONFIG_LIBDIR=${LWJGL_BUILD_SYSROOT}/usr/lib/pkgconfig:${LWJGL_BUILD_SYSROOT}/usr/share/pkgconfig:${LWJGL_BUILD_SYSROOT}/usr/lib/arm-linux-gnueabihf/pkgconfig:${LWJGL_BUILD_SYSROOT}/usr/share/arm-linux-gnueabihf/pkgconfig" >> .lwjgl_env_rpxc
+- echo "PKG_CONFIG_LIBDIR=${LWJGL_BUILD_SYSROOT}/usr/lib/pkgconfig:${LWJGL_BUILD_SYSROOT}/usr/share/pkgconfig:${LWJGL_BUILD_SYSROOT}/usr/lib/arm-linux-gnueabihf/pkgconfig:${LWJGL_BUILD_SYSROOT}/usr/share/arm-linux-gnueabihf/pkgconfig" | tee .lwjgl_env_rpxc
 - echo "PKG_CONFIG_SYSROOT_DIR=$LWJGL_BUILD_SYSROOT" >> .lwjgl_env_rpxc
 - cat .lwjgl_env_rpxc
 #- export 
