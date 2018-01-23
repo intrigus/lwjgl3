@@ -39,5 +39,5 @@ script:
 - echo "PKG_CONFIG_LIBDIR=$(rpxc sh -c 'echo $SYSROOT')/usr/lib/pkgconfig:$(rpxc sh -c 'echo $SYSROOT')/usr/share/pkgconfig" >> .lwjgl_env_rpxc
 - echo "PKG_CONFIG_SYSROOT_DIR=$(rpxc sh -c 'echo $SYSROOT')" >> .lwjgl_env_rpxc
 #- export 
-- rpxc --args "--env-file .lwjgl_env_rpxc" bash -c 'printenv && ant -debug -DtoolPrefix=arm-linux-gnueabihf- compile-templates tests'
+- rpxc --args "--env-file .lwjgl_env_rpxc" bash -c 'find / -name gtk+-3.0.pc && pkg-config --debug gtk+-3.0 && printenv && ant -debug -DtoolPrefix=arm-linux-gnueabihf- compile-templates tests'
 # upload-native
