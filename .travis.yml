@@ -28,6 +28,7 @@ before_install:
 - docker run intrigus/docker-raspberry-pi-cross-compiler > ~/bin/rpxc
 - chmod +x ~/bin/rpxc
 - export PATH=$PATH:$HOME/bin:$HOME/.local/bin
+- export RPXC_IMAGE=intrigus/docker-raspberry-pi-cross-compiler
 
 script:
 - echo "LWJGL_BUILD_TYPE=nightly" >> .lwjgl_env_rpxc
@@ -38,5 +39,5 @@ script:
 - echo "PKG_CONFIG_LIBDIR=$(rpxc sh -c 'echo $SYSROOT')/usr/lib/pkgconfig:$(rpxc sh -c 'echo $SYSROOT')/usr/share/pkgconfig" >> .lwjgl_env_rpxc
 - echo "PKG_CONFIG_SYSROOT_DIR=$(rpxc sh -c 'echo $SYSROOT')" >> .lwjgl_env_rpxc
 #- export 
-- rpxc --args "--env-file .lwjgl_env_rpxc" --image intrigus/docker-raspberry-pi-cross-compiler bash -c 'printenv && ant -debug -DtoolPrefix=arm-linux-gnueabihf- compile-templates tests'
+- rpxc --args "--env-file .lwjgl_env_rpxc" bash -c 'printenv && ant -debug -DtoolPrefix=arm-linux-gnueabihf- compile-templates tests'
 # upload-native
