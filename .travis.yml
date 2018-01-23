@@ -31,6 +31,7 @@ before_install:
 
 script:
 - echo "LWJGL_BUILD_TYPE=nightly" >> .lwjgl_env_rpxc
+- echo "LWJGL_BUILD_OFFLINE=true" >> .lwjgl_env_rpxc
 - echo "LWJGL_BUILD_ARCH=armv6" >> .lwjgl_env_rpxc
 - echo "LWJGL_BUILD_SYSROOT=$(rpxc sh -c 'echo $SYSROOT')" >> .lwjgl_env_rpxc
 #- export 
