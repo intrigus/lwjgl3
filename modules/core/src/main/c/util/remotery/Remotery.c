@@ -156,11 +156,6 @@ static rmtU8 minU8(rmtU8 a, rmtU8 b)
 {
     return a < b ? a : b;
 }
-static rmtS64 minS64(rmtS64 a, rmtS64 b)
-{
-    return a < b ? a : b;
-}
-
 
 static rmtU8 maxU8(rmtU8 a, rmtU8 b)
 {
