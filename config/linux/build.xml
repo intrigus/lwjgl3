@@ -57,7 +57,7 @@
         <attribute name="dest"/>
         <attribute name="linker" default="${toolPrefix}gcc${toolSuffix}"/>
         <attribute name="lang" default="c"/>
-        <attribute name="flags" default="-Werror -Wall -Wextra -pedantic -Wno-extended-offsetof"/>
+        <attribute name="flags" default="-Wfatal-errors -Wall -Wextra -pedantic -Wno-extended-offsetof"/>
         <element name="beforeCompile" optional="true"/>
         <element name="source"/>
         <element name="beforeLink" optional="true"/>
