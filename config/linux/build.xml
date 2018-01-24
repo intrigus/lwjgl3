@@ -131,7 +131,11 @@
             </source>
             <beforeLink>
                 <mkdir dir="${lib}/linux/${build.arch}"/>
-                
+                <parallel threadsPerProcessor="2" failonany="true" unless:set="lib-uptodate">
+                    <update-dependency name="dyncall" artifact="${build.arch}/libdyncall_s.a"/>
+                    <update-dependency name="dyncallback" artifact="${build.arch}/libdyncallback_s.a"/>
+                    <update-dependency name="dynload" artifact="${build.arch}/libdynload_s.a"/>
+                </parallel>
             </beforeLink>
             <link>
                 <fileset dir="${lib}/linux/${build.arch}/">
