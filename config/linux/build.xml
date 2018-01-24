@@ -280,7 +280,7 @@
         </build>
 
         <!-- tinyexr -->
-        <build name="lwjgl_tinyexr" dest="${bin.native}/tinyexr" linker="g++-6" if:true="${binding.tinyexr}">
+        <build name="lwjgl_tinyexr" dest="${bin.native}/tinyexr" linker="${toolPrefix}g++${toolSuffix}" if:true="${binding.tinyexr}">
             <beforeCompile>
                 <compile dest="@{dest}" lang="c++" flags="">
                     <arg value="-I${src.native.rel}/util/tinyexr"/>
