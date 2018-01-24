@@ -157,7 +157,6 @@ static rmtU8 minU8(rmtU8 a, rmtU8 b)
     return a < b ? a : b;
 }
 
-}
 static rmtU16 maxU16(rmtU16 a, rmtU16 b)
 {
     return a > b ? a : b;
