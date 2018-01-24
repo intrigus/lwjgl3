@@ -16,11 +16,7 @@ addons:
     - ubuntu-toolchain-r-test
     packages:
     - ant
-#    - gcc-6
-#    - g++-6
     - oracle-java8-installer
-#    - xorg-dev
-#    - libgtk-3-dev
 
 before_install:
 - pip install --user awscli
@@ -32,14 +28,11 @@ before_install:
 
 script:
 - echo "LWJGL_BUILD_TYPE=nightly" >> .lwjgl_env_rpxc
-#- echo "LWJGL_BUILD_OFFLINE=true" >> .lwjgl_env_rpxc
 - echo "LWJGL_BUILD_ARCH=armv6" >> .lwjgl_env_rpxc
 - LWJGL_BUILD_SYSROOT=$(rpxc sh -c 'echo -n $SYSROOT')
 - echo "LWJGL_BUILD_SYSROOT=${LWJGL_BUILD_SYSROOT}" >> .lwjgl_env_rpxc
 - echo "PKG_CONFIG_DIR=" >> .lwjgl_env_rpxc
 - echo "PKG_CONFIG_LIBDIR=${LWJGL_BUILD_SYSROOT}/usr/lib/pkgconfig:${LWJGL_BUILD_SYSROOT}/usr/share/pkgconfig:${LWJGL_BUILD_SYSROOT}/usr/lib/arm-linux-gnueabihf/pkgconfig:${LWJGL_BUILD_SYSROOT}/usr/share/arm-linux-gnueabihf/pkgconfig" >> .lwjgl_env_rpxc
 - echo "PKG_CONFIG_SYSROOT_DIR=${LWJGL_BUILD_SYSROOT}" >> .lwjgl_env_rpxc
-- cat .lwjgl_env_rpxc
-#- export 
-- rpxc --args "--env-file .lwjgl_env_rpxc" bash -c 'printenv && pkg-config --debug gtk+-3.0 && printenv && ant -Dbinding.sse=false -Dbinding.tootle=false -Dbinding.rpmalloc=false -DtoolPrefix=arm-linux-gnueabihf- compile-templates tests'
+- rpxc --args "--env-file .lwjgl_env_rpxc" bash -c 'ant -Dbinding.sse=false -Dbinding.tootle=false -Dbinding.rpmalloc=false -DtoolPrefix=arm-linux-gnueabihf- compile-templates tests'
 # upload-native
